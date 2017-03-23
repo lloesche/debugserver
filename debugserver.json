@@ -1,0 +1,30 @@
+{
+  "id": "/debug/debugserver",
+  "instances": 1,
+  "cpus": 0.1,
+  "mem": 256,
+  "container": {
+    "docker": {
+      "image": "lloesche/debugserver",
+      "forcePullImage": false,
+      "privileged": false,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "network": "BRIDGE"
+    }
+  },
+  "healthChecks": [
+    {
+      "protocol": "HTTP",
+      "path": "/health"
+    }
+  ],
+  "labels": {
+    "HAPROXY_GROUP": "external",
+    "HAPROXY_0_VHOST": "debugserver.example.com"
+  }
+}
